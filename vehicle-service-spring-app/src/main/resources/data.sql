@@ -32,5 +32,7 @@ INSERT INTO software(id, name, version, ecu_id) values (14, 'seatpack', 3, 4);
 INSERT INTO software(id, name, version, ecu_id) values (15, 'hud', 2, 6);
 INSERT INTO software(id, name, version, ecu_id) values (16, 'hud', 3, 3);
 INSERT INTO software(id, name, version, ecu_id) values (17, 'hud', 4, 2);
+INSERT INTO software(id, name, version, ecu_id) values (18, 'hud', 2, 10);
+INSERT INTO software(id, name, version, ecu_id) values (19, 'hud', 1, 9);
 
 
