@@ -1,37 +1,3 @@
-create table vehicle
-(
-	id bigserial not null
-		constraint vehicle_pkey
-			primary key,
-	manufacturer varchar(255),
-	model varchar(255),
-	vin varchar(255)
-);
-
-create table ecu
-(
-    id           bigserial not null
-        constraint ecu_pkey
-            primary key,
-    manufacturer varchar(255),
-    model        varchar(255),
-    vehicle_id   bigint
-        constraint fkq3n19my5mpya9151jcp3c185v
-            references vehicle
-);
-
-create table software
-(
-	id bigserial not null
-		constraint software_pkey
-			primary key,
-	name varchar(255),
-	version integer,
-	ecu_id bigint
-		constraint fkkdl8ex50752q10b3uyu4qobf9
-			references ecu
-);
-
 INSERT INTO vehicle(id, manufacturer, model, vin) values (1, 'Skoda', 'Fabia', 's8438957328923879238');
 INSERT INTO vehicle(id, manufacturer, model, vin) values (2, 'Toyota', 'Rav4', 'fhwiyocyt8ty9348yx98');
 INSERT INTO vehicle(id, manufacturer, model, vin) values (3, 'Dacia', 'Dokker', 'dskjfhty3498ctyh9w8y');
