@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController
 class UpdateController(private val updateService: UpdateService) {
 
     @PostMapping("/")
-    fun getUpdates(@RequestBody updateRequest: UpdateRequest): List<AvailableUpdate> {
-        return updateService.getVehicleUpdates(listOf(updateRequest))
+    fun getUpdates(@RequestBody updateRequest: List<UpdateRequest>): List<AvailableUpdate> {
+        return updateService.getVehicleUpdates(updateRequest)
     }
 }

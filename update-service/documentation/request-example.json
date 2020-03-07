@@ -1,0 +1,37 @@
+[
+  {
+    "vehicleId": 1,
+    "ecus": [
+      {
+        "id": 3,
+        "software": [
+          {
+            "id": 1,
+            "name": "powertool",
+            "version": 1
+          },
+          {
+            "id": 1,
+            "name": "seatpack",
+            "version": 1
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "vehicleId": 2,
+    "ecus": [
+      {
+        "id": 1,
+        "software": [
+          {
+            "id": 1,
+            "name": "powertool",
+            "version": 1
+          }
+        ]
+      }
+    ]
+  }
+]
