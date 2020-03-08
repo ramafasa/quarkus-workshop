@@ -33,13 +33,13 @@ class UpdateServiceTest {
         val supportedEcu = createEcu(BigInteger.ONE)
         val vehicle = createVehicle(BigInteger.ONE, supportedEcu)
 
-        val supportedSoftware = createSupportedSoftware(BigInteger.ONE, "powertrain", 2, supportedEcu)
+        val supportedSoftware = createSoftware(BigInteger.ONE, "powertrain", 2, supportedEcu)
 
         val softwareRequest = SoftwareRequest(BigInteger.valueOf(1), name= "powertrain", version = 1)
-        val ecuRequest = EcuRequest(id = BigInteger.valueOf(1), software = listOf(softwareRequest))
+        val ecuRequest = EcuRequest(id = BigInteger.valueOf(1), software = setOf(softwareRequest))
 
         // WHEN
-        val actual = sut.getAvailableUpdates(vehicle, listOf(ecuRequest), listOf(supportedSoftware))
+        val actual = sut.getAvailableUpdates(vehicle, setOf(ecuRequest), listOf(supportedSoftware))
 
         // THEN
         assertThat(actual)
@@ -50,16 +50,17 @@ class UpdateServiceTest {
 
     @Test
     fun `getAvailableUpdates should not return updates for software which is already up-to-date`() {
+        // GIVEN
         val supportedEcu = createEcu(BigInteger.ONE)
         val vehicle = createVehicle(BigInteger.ONE, supportedEcu)
 
-        val supportedSoftware = createSupportedSoftware(BigInteger.ONE, "powertrain", 2, supportedEcu)
+        val supportedSoftware = createSoftware(BigInteger.ONE, "powertrain", 2, supportedEcu)
 
         val softwareRequest = SoftwareRequest(BigInteger.valueOf(1), name= "powertrain", version = 2)
-        val ecuRequest = EcuRequest(id = BigInteger.valueOf(1), software = listOf(softwareRequest))
+        val ecuRequest = EcuRequest(id = BigInteger.valueOf(1), software = setOf(softwareRequest))
 
         // WHEN
-        val actual = sut.getAvailableUpdates(vehicle, listOf(ecuRequest), listOf(supportedSoftware))
+        val actual = sut.getAvailableUpdates(vehicle, setOf(ecuRequest), listOf(supportedSoftware))
 
         // THEN
         assertThat(actual).isNullOrEmpty()
@@ -68,16 +69,17 @@ class UpdateServiceTest {
 
     @Test
     fun `getAvailableUpdates should not return updates if the ecu is not managed by the server`() {
+        // GIVEN
         val supportedEcu = createEcu(BigInteger.ONE)
         val vehicle = createVehicle(BigInteger.ONE, supportedEcu)
 
-        val supportedSoftware = createSupportedSoftware(BigInteger.ONE, "powertrain", 2, supportedEcu)
+        val supportedSoftware = createSoftware(BigInteger.ONE, "powertrain", 2, supportedEcu)
 
         val softwareRequest = SoftwareRequest(BigInteger.valueOf(1), name= "powertrain", version = 2)
-        val ecuRequest = EcuRequest(id = BigInteger.valueOf(2), software = listOf(softwareRequest))
+        val ecuRequest = EcuRequest(id = BigInteger.valueOf(2), software = setOf(softwareRequest))
 
         // WHEN
-        val actual = sut.getAvailableUpdates(vehicle, listOf(ecuRequest), listOf(supportedSoftware))
+        val actual = sut.getAvailableUpdates(vehicle, setOf(ecuRequest), listOf(supportedSoftware))
 
         // THEN
         assertThat(actual).isNullOrEmpty()
@@ -90,7 +92,7 @@ class UpdateServiceTest {
         return vehicle
     }
 
-    private fun createSupportedSoftware(swId: BigInteger, swName: String, swVersion: Long, ecu: Ecu): Software {
+    private fun createSoftware(swId: BigInteger, swName: String, swVersion: Long, ecu: Ecu): Software {
         val supportedSoftware = Software(name = swName, version = swVersion, supportedEcus = listOf(ecu))
         supportedSoftware.id = swId
         return supportedSoftware
