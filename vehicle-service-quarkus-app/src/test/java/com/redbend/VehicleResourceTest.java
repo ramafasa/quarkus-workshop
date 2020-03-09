@@ -4,8 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.redbend.model.Vehicle;
 
-import io.quarkus.test.junit.QuarkusTest;
 import org.junit.jupiter.api.Test;
+
+import io.quarkus.test.junit.QuarkusTest;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.CoreMatchers.is;
@@ -15,16 +16,17 @@ public class VehicleResourceTest {
 
     private ObjectMapper objectMapper = new ObjectMapper();
 
+
     @Test
-    public void testHelloEndpoint() throws JsonProcessingException {
+    public void shouldReturnRetrievedVehicle() throws JsonProcessingException {
 
         Vehicle vehicle = new Vehicle();
         vehicle.setModel("model");
 
         given()
-          .when().get("/vehicles/1")
-          .then()
-             .statusCode(200)
+                .when().get("/vehicles/1")
+                .then()
+                .statusCode(200)
                 .body(is(objectMapper.writeValueAsString(vehicle)));
     }
 }

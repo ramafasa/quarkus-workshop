@@ -1,3 +1,5 @@
+package com.redbend.mock;
+
 import com.redbend.VehicleService;
 import com.redbend.model.Vehicle;
 
